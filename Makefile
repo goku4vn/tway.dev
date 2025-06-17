@@ -5,22 +5,30 @@ SRC_MD := demo/index.md
 TEMPLATE := demo/template.html
 CSS := --css src/reset.css --css src/index.css
 
-# Add post support
 POSTS := $(wildcard posts/*.md)
-POST_HTML := $(POSTS:.md=.html)
+POST_HTML := $(patsubst posts/%.md,dist/posts/%.html,$(POSTS))
 
 # Default target
 all: build
 
 .PHONY: all clean build
 
-build: index.html $(POST_HTML)
+build: dist/index.html $(POST_HTML)
 
-index.html: $(SRC_MD) $(TEMPLATE) Makefile
+# Ensure dist/ and dist/posts/ exist
+dist:
+	mkdir -p dist
+
+dist/posts:
+	mkdir -p dist/posts
+
+# Build main index.html
+dist/index.html: $(SRC_MD) $(TEMPLATE) Makefile | dist
 	pandoc --toc -s $(CSS) -Vversion=v$(VERSION) -Vdate=$(DATE) -i $< -o $@ --template=$(TEMPLATE)
 
-posts/%.html: posts/%.md
+# Build posts/*.html into dist/posts/
+dist/posts/%.html: posts/%.md | dist/posts
 	pandoc -s $(CSS) -Vdate=$(DATE) -i $< -o $@ --template=$(TEMPLATE)
 
 clean:
-	rm -f index.html posts/*.html
+	rm -rf dist
