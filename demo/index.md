@@ -1,5 +1,5 @@
 ---
-title: The Monospace Web
+title: tway.dev
 subtitle: A minimalist design exploration
 author: Oskar Wickström
 author-url: "https://wickstrom.tech"
