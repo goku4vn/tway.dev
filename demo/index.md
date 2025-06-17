@@ -1,8 +1,8 @@
 ---
 title: tway.dev
-subtitle: A minimalist design exploration
-author: Oskar Wickström
-author-url: "https://wickstrom.tech"
+subtitle: the new way to explore the world
+author: Tung
+author-url: "https://tway.dev"
 lang: en
 toc-title: Contents
 ---
