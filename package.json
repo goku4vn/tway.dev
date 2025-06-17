@@ -1,24 +1,24 @@
 {
-  "name": "@owickstrom/the-monospace-web",
+  "name": "@goku4vn/tway.dev",
   "version": "0.1.5",
-  "description": " A minimalist design exploration",
+  "description": " The new way to explore the world",
   "main": "src/index.css",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/owickstrom/the-monospace-web.git"
+    "url": "git+ssh://git@github.com/goku4vn/tway.dev.git"
   },
   "keywords": [
     "css"
   ],
-  "author": "Oskar Wickström",
+  "author": "Tung",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/owickstrom/the-monospace-web/issues"
+    "url": "https://github.com/goku4vn/tway.dev/issues"
   },
-  "homepage": "https://github.com/owickstrom/the-monospace-web#readme",
+  "homepage": "https://tway.dev",
 
   "files": [
     "src/index.css",
