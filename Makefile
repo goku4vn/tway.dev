@@ -10,16 +10,16 @@ POSTS := $(wildcard posts/*.md)
 POST_HTML := $(patsubst posts/%.md,dist/posts/%.html,$(POSTS))
 POST_CSS := --css $(BASEURL)/src/reset.css --css $(BASEURL)/src/index.css
 
-RESUMES_SRC := resumes/index.md
-RESUMES_HTML := dist/resumes/index.html
-RESUMES_CSS := --css $(BASEURL)/src/reset.css --css $(BASEURL)/src/index.css
+RESUME_SRC := resume/index.md
+RESUME_HTML := dist/resume/index.html
+RESUME_CSS := --css $(BASEURL)/src/reset.css --css $(BASEURL)/src/index.css
 
 # Default target
 all: build
 
 .PHONY: all clean build
 
-build: demo/index.generated.md dist/index.html $(POST_HTML) $(RESUMES_HTML) dist/src
+build: demo/index.generated.md dist/index.html $(POST_HTML) $(RESUME_HTML) dist/src
 
 # Ensure dist/ and dist/posts/ exist
 dist:
@@ -43,11 +43,11 @@ dist/posts/%.html: posts/%.md $(TEMPLATE) Makefile | dist/posts
 demo/index.generated.md: demo/index.md $(POSTS)
 	scripts/gen_latest_posts.sh
 
-$(RESUMES_HTML): $(RESUMES_SRC) $(TEMPLATE) Makefile | dist/resumes
-	pandoc -s $(RESUMES_CSS) -i $< -o $@ --template=$(TEMPLATE)
+$(RESUME_HTML): $(RESUME_SRC) $(TEMPLATE) Makefile | dist/resume
+	pandoc -s $(RESUME_CSS) -i $< -o $@ --template=$(TEMPLATE)
 
-dist/resumes:
-	mkdir -p dist/resumes
+dist/resume:
+	mkdir -p dist/resume
 
 clean:
 	rm -rf dist

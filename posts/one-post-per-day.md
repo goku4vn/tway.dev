@@ -4,7 +4,7 @@ title: One post per day
 subtitle: Easy automation from Trello to your blog
 date: 2025-06-18
 author: Tung
-author-url: "https://tway.dev/resumes"
+author-url: "https://tway.dev/resume"
 lang: en
 toc-title: Contents
 keywords: tway.dev, self development, career growth, solution architect, technical leader, automation, productivity, workflow

@@ -1,14 +1,14 @@
 ---
-title-prefix: tway.dev
+title-prefix: RESUME
 title: TUNG MANG
 subtitle: Technical Lead & Tech Blogger
 date: 2025-06-18
 author: Tung
-author-url: "https://tway.dev/resumes"
+author-url: "https://tway.dev/resume"
 lang: en
 toc-title: Contents
-keywords: tway.dev, self development, career growth, solution architect, technical leader
-description-meta: tway.dev - the new way to explore the world
+keywords: tungmang, mang vien tung, tway.dev, self development, career growth, solution architect, technical leader
+description-meta: RESUME - TUNG MANG - Technical Lead & Tech Blogger
 author-meta: Tung
 date-meta: 2025-06-18
 ---
