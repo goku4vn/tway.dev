@@ -2,7 +2,7 @@ VERSION := $(shell jq -r .version package.json 2>/dev/null || echo "0.0.0")
 DATE := $(shell date +%F)
 BASEURL := /tway.dev
 
-SRC_MD := demo/index.md
+SRC_MD := demo/index.generated.md
 TEMPLATE := demo/template.html
 CSS := --css src/reset.css --css src/index.css
 
@@ -15,7 +15,7 @@ all: build
 
 .PHONY: all clean build
 
-build: dist/index.html $(POST_HTML) dist/src
+build: demo/index.generated.md dist/index.html $(POST_HTML) dist/src
 
 # Ensure dist/ and dist/posts/ exist
 dist:
@@ -35,6 +35,9 @@ dist/index.html: $(SRC_MD) $(TEMPLATE) Makefile | dist
 # Build posts/*.html into dist/posts/
 dist/posts/%.html: posts/%.md $(TEMPLATE) Makefile | dist/posts
 	pandoc -s $(POST_CSS) -Vdate=$(DATE) -i $< -o $@ --template=$(TEMPLATE)
+
+demo/index.generated.md: demo/index.md $(POSTS)
+	scripts/gen_latest_posts.sh
 
 clean:
 	rm -rf dist

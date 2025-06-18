@@ -16,9 +16,7 @@ Great tech architects evolve beyond code—they refine their system thinking, co
 
 ## Latest Posts
 
-- [One post per day](/posts/one-post-per-day) - Easy automation from Trello to blog
-- [Solution Architect Career Path](/posts/solution-architect-career-path) - A comprehensive guide to becoming a successful solution architect
-- [Technical Leadership](/posts/technical-leadership) - Essential skills and practices for technical leaders
+<!--LATEST_POSTS-->
 
 ## Featured Categories
 

@@ -2,3 +2,4 @@ dist/*
 index.html
 
 .DS_STORE
+index.generated.md
