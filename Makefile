@@ -1,6 +1,6 @@
 VERSION := $(shell jq -r .version package.json 2>/dev/null || echo "0.0.0")
 DATE := $(shell date +%F)
-BASEURL := /tway.dev
+BASEURL := 
 
 SRC_MD := demo/index.generated.md
 TEMPLATE := demo/template.html

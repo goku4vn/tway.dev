@@ -1,7 +1,7 @@
 ---
 title-prefix: tway.dev
 title: One post per day
-subtitle: Easy automation from Trello to blog
+subtitle: Easy automation from Trello to your blog
 author: Tung
 author-url: "https://tway.dev"
 lang: en
