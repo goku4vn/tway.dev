@@ -15,7 +15,7 @@ all: build
 
 .PHONY: all clean build
 
-build: dist/index.html $(POST_HTML)
+build: dist/index.html $(POST_HTML) dist/src
 
 # Ensure dist/ and dist/posts/ exist
 dist:
