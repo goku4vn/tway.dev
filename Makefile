@@ -30,7 +30,7 @@ dist/src: src/*
 
 # Build main index.html
 dist/index.html: $(SRC_MD) $(TEMPLATE) Makefile | dist
-	pandoc --toc -s $(CSS) -Vversion=v$(VERSION) -Vdate=$(DATE) -i $< -o $@ --template=$(TEMPLATE)
+	pandoc --toc -s $(CSS) -Vdate=$(DATE) -i $< -o $@ --template=$(TEMPLATE)
 
 # Build posts/*.html into dist/posts/
 dist/posts/%.html: posts/%.md $(TEMPLATE) Makefile | dist/posts
