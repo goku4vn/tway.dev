@@ -24,6 +24,10 @@ dist:
 dist/posts:
 	mkdir -p dist/posts
 
+dist/src: src/*
+	mkdir -p dist/src
+	cp -r src/* dist/src/
+
 # Build main index.html
 dist/index.html: $(SRC_MD) $(TEMPLATE) Makefile | dist
 	pandoc --toc -s $(CSS) -Vversion=v$(VERSION) -Vdate=$(DATE) -i $< -o $@ --template=$(TEMPLATE)
