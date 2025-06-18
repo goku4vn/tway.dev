@@ -4,7 +4,7 @@ title: tway.dev
 subtitle: The new way to explore the world
 date: 2025-06-18
 author: Tung
-author-url: "https://tway.dev"
+author-url: "https://tway.dev/resumes"
 lang: en
 toc-title: Contents
 keywords: tway.dev, self development, career growth, solution architect, technical leader
