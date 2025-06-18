@@ -30,11 +30,11 @@ dist/src: src/*
 
 # Build main index.html
 dist/index.html: $(SRC_MD) $(TEMPLATE) Makefile | dist
-	pandoc --toc -s $(CSS) -Vdate=$(DATE) -i $< -o $@ --template=$(TEMPLATE)
+	pandoc --toc -s $(CSS) -i $< -o $@ --template=$(TEMPLATE)
 
 # Build posts/*.html into dist/posts/
 dist/posts/%.html: posts/%.md $(TEMPLATE) Makefile | dist/posts
-	pandoc -s $(POST_CSS) -Vdate=$(DATE) -i $< -o $@ --template=$(TEMPLATE)
+	pandoc -s $(POST_CSS) -i $< -o $@ --template=$(TEMPLATE)
 
 demo/index.generated.md: demo/index.md $(POSTS)
 	scripts/gen_latest_posts.sh

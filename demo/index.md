@@ -2,12 +2,15 @@
 title-prefix: tway.dev
 title: tway.dev
 subtitle: The new way to explore the world
+date: 2025-06-18
 author: Tung
 author-url: "https://tway.dev"
 lang: en
 toc-title: Contents
 keywords: tway.dev, self development, career growth, solution architect, technical leader
 description-meta: tway.dev - the new way to explore the world
+author-meta: Tung
+date-meta: 2025-06-18
 ---
 
 ## Introduction
