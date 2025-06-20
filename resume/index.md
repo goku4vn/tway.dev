@@ -13,7 +13,7 @@ author-meta: Tung
 date-meta: 2025-06-18
 ---
 ## TUNG MANG
-Technical Lead | Ho Chi Minh City | tungmang@outlook.com | https://tway.dev/resume
+Technical Lead | Ho Chi Minh City | tungmang@outlook.com | 0909699756
 
 ## PROFESSIONAL SUMMARY
 Experienced Technical Lead with over 10 years of experience in software development and technical team management. Specialized in building technology projects for enterprises and government from the ground up. Leading and developing technical teams to create robust products together.
