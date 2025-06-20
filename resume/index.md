@@ -1,7 +1,7 @@
 ---
-title-prefix: RESUME
-title: TUNG MANG
-subtitle: Technical Lead & Tech Blogger
+title-prefix: 
+title: RESUME
+subtitle: Tung Mang | Technical Lead & Tech Blogger
 date: 2025-06-18
 author: Tung
 author-url: "https://tway.dev/resume"
