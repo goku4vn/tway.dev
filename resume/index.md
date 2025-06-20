@@ -8,7 +8,7 @@ author-url: "https://tway.dev/resume"
 lang: en
 toc-title: Contents
 keywords: tungmang, mang vien tung, tway.dev, self development, career growth, solution architect, technical leader
-description-meta: Technical Lead | Ho Chi Minh City | tungmang@outlook.com | https://tway.dev/resume
+description-meta: Technical Lead | Ho Chi Minh City | tungmang@outlook.com | 0909699756 | https://tway.dev/resume
 author-meta: Tung
 date-meta: 2025-06-18
 ---
