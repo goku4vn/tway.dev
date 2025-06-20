@@ -43,18 +43,6 @@ Great tech architects evolve beyond code—they refine their system thinking, co
 - Work-life balance
 - Continuous learning
 
-## Newsletter
-
-Stay updated with the latest insights and tips by subscribing to our newsletter. Get weekly curated content delivered straight to your inbox.
-
-[Subscribe Now](#)
-
-## Connect With Us
-
-- [Twitter](https://twitter.com/twaydev)
-- [LinkedIn](https://linkedin.com/in/twaydev)
-- [GitHub](https://github.com/twaydev)
-
 ## About tway.dev
 
 tway.dev is dedicated to helping tech professionals grow in their careers through practical insights, real-world experiences, and actionable advice. Our mission is to empower developers, architects, and technical leaders to achieve their full potential.
