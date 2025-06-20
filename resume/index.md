@@ -69,8 +69,8 @@ Experienced Technical Lead with over 10 years of experience in software developm
 - Provided onsite deployment and UAT support for enterprise clients
 
 ## CERTIFICATIONS
-- **Diploma in Information Systems Management | 2018 - 2019**
-- **Higher Diploma in Software Engineering | 2019 - 2020**
+- **2018 - 2019 | FPT Aptech - Diploma in Information Systems Management**
+- **2019 - 2020 | FPT Aptech - Higher Diploma in Software Engineering**
 
 ## LANGUAGES
 - **Vietnamese:** Native
