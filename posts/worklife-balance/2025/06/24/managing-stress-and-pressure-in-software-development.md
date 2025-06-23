@@ -10,7 +10,7 @@ author-meta: Tung
 lang: en
 toc-title: Contents
 keywords: tway.dev, stress management, software development, mental health, tech world
-description-meta: tway.dev - Managing Stress and Pressure in Software Development - Unwind while coding: Strategies to maintain your calm in the fast-paced tech world.
+description-meta: "tway.dev - Managing Stress and Pressure in Software Development - Unwind while coding: Strategies to maintain your calm in the fast-paced tech world."
 ---
 
 # Managing Stress and Pressure in Software Development
