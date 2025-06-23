@@ -38,6 +38,10 @@ for file in $(find "$POSTS_DIR" -type f -name "*.md" | grep -v 'posts/index.md$'
   fi
 done
 
+if [ -n "$LATEST_POSTS" ]; then
+  LATEST_POSTS+="\\n[View all posts...](/posts/)"
+fi
+
 awk -v posts="$LATEST_POSTS" '
   /<!--LATEST_POSTS-->/ { print posts; next }
   { print }

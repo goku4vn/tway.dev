@@ -8,4 +8,5 @@
 - Tạo script `scripts/gen_all_posts.sh` để tự động hóa việc tạo danh sách tất cả các bài viết.
 - Cập nhật `Makefile` để tích hợp việc tạo và xây dựng trang `/posts` vào quy trình làm việc chung.
 - Cập nhật script `scripts/gen_latest_posts.sh` để lấy các bài viết mới nhất từ cấu trúc thư mục lồng nhau, đảm bảo danh sách luôn chính xác.
-- Bổ sung tính năng hiển thị ngày tháng của bài viết, được trích xuất từ đường dẫn file, giúp người đọc dễ dàng xác định thời gian đăng bài. 
+- Bổ sung tính năng hiển thị ngày tháng của bài viết, được trích xuất từ đường dẫn file, giúp người đọc dễ dàng xác định thời gian đăng bài.
+- Thêm liên kết "View all posts" ở cuối danh sách "Latest Posts" để người đọc có thể dễ dàng xem toàn bộ bài viết. 
