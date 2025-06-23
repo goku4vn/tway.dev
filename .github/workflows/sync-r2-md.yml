@@ -21,6 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      actions: write
 
     steps:
       - name: Checkout repository
@@ -68,3 +69,8 @@ jobs:
             git commit -m "Sync: Update posts from R2"
             git push
           fi 
+          
+      - name: Trigger GitHub Pages deployment
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_DEPLOY_TOKEN }}
+        run: gh workflow run main.yml --ref ${{ github.ref_name }} 
