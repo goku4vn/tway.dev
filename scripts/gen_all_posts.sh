@@ -14,6 +14,15 @@ for file in $(find "$POSTS_DIR" -type f -name "*.md" | grep -v 'posts/index.md$'
   # from posts/a/b/c.md -> a/b/c.html
   link=$(echo "$file" | sed -e 's,^posts/,,g' -e 's/\.md$/.html/g')
   
+  # Extract date from path like YYYY/MM/DD
+  date_path=$(echo "$file" | grep -o '[0-9]\{4\}/[0-9]\{2\}/[0-9]\{2\}' || true)
+  if [ -n "$date_path" ]; then
+    formatted_date=$(echo "$date_path" | sed 's/\//-/g')
+    prefix="$formatted_date: "
+  else
+    prefix=""
+  fi
+  
   title=$(grep -m1 '^title:' "$file" | sed 's/^title:[ ]*//' || true)
   
   # Fallback to filename if title is not found
@@ -21,7 +30,7 @@ for file in $(find "$POSTS_DIR" -type f -name "*.md" | grep -v 'posts/index.md$'
     title=$(basename "$file" .md)
   fi
   
-  ALL_POSTS+="- [$title]($link)\\n"
+  ALL_POSTS+="- $prefix[$title]($link)\\n"
 done
 
 # Using awk to replace the placeholder
