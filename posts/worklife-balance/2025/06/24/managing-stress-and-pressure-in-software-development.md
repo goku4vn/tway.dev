@@ -1,7 +1,7 @@
 ---
 title-prefix: tway.dev
 title: Managing Stress and Pressure in Software Development
-subtitle: Unwind while coding: Strategies to maintain your calm in the fast-paced tech world.
+subtitle: "Unwind while coding: Strategies to maintain your calm in the fast-paced tech world."
 date: 2025-06-24
 date-meta: 2025-06-24
 author: Tung
