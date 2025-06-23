@@ -10,6 +10,11 @@ name: Sync Markdown from R2
 
 on:
   workflow_dispatch:
+    inputs:
+      files:
+        description: 'A JSON string array of file paths to sync from R2 (relative to the ai-posts/ directory)'
+        required: true
+        type: string
 
 jobs:
   sync:
@@ -31,13 +36,24 @@ jobs:
           R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
           R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
         run: |
-          rclone config create r2 s3 provider=Cloudflare access_key_id=$R2_ACCESS_KEY_ID secret_access_key=$R2_SECRET_ACCESS_KEY endpoint=$R2_ENDPOINT--non-interactive
+          rclone config create r2 s3 provider=Cloudflare access_key_id=$R2_ACCESS_KEY_ID secret_access_key=$R2_SECRET_ACCESS_KEY endpoint="https://$R2_ACCOUNT_ID.r2.cloudflarestorage.com" --non-interactive
 
-      - name: Sync posts from R2 bucket
+      - name: Sync specific posts from R2 bucket
         env:
           R2_BUCKET_NAME: ${{ secrets.R2_BUCKET_NAME }}
+          FILES_JSON: ${{ inputs.files }}
         run: |
-          rclone sync r2:$R2_BUCKET_NAME/ai-posts/ posts/
+          # The input is a JSON array string. Parse it and write to a file for rclone.
+          echo "$FILES_JSON" | jq -r '.[]' > files_to_sync.txt
+          
+          echo "Files to sync:"
+          cat files_to_sync.txt
+          
+          # Use --files-from to sync only the specified files.
+          # The source is the `ai-posts` directory in the R2 bucket.
+          # The destination is the local `posts` directory.
+          # The paths in files_to_sync.txt are relative to the source directory.
+          rclone copy "r2:${R2_BUCKET_NAME}/ai-posts/" "posts/" --files-from files_to_sync.txt
 
       - name: Commit and push changes
         run: |
