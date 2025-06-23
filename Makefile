@@ -10,6 +10,9 @@ POSTS := $(shell find posts -name '*.md' -type f)
 POST_HTML := $(patsubst posts/%.md,dist/posts/%.html,$(POSTS))
 POST_CSS := --css $(BASEURL)/src/reset.css --css $(BASEURL)/src/index.css
 
+ALL_POSTS_SRC := posts/index.generated.md
+ALL_POSTS_HTML := dist/posts/index.html
+
 RESUME_SRC := resume/index.md
 RESUME_HTML := dist/resume/index.html
 RESUME_CSS := --css $(BASEURL)/src/reset.css --css $(BASEURL)/src/index.css
@@ -19,7 +22,7 @@ all: build
 
 .PHONY: all clean build
 
-build: demo/index.generated.md dist/index.html $(POST_HTML) $(RESUME_HTML) dist/src
+build: demo/index.generated.md dist/index.html $(POST_HTML) $(RESUME_HTML) $(ALL_POSTS_HTML) dist/src
 
 # Ensure dist/ and dist/posts/ exist
 dist:
@@ -41,8 +44,14 @@ dist/posts/%.html: posts/%.md $(TEMPLATE) Makefile
 	mkdir -p $(@D)
 	pandoc -s $(POST_CSS) -Vdate=$(DATE) -i $< -o $@ --template=$(TEMPLATE)
 
+$(ALL_POSTS_HTML): $(ALL_POSTS_SRC) $(TEMPLATE) Makefile | dist/posts
+	pandoc -s $(POST_CSS) -Vdate=$(DATE) -i $< -o $@ --template=$(TEMPLATE)
+
 demo/index.generated.md: $(POSTS) demo/index.md scripts/gen_latest_posts.sh
 	scripts/gen_latest_posts.sh
+
+$(ALL_POSTS_SRC): posts/index.md scripts/gen_all_posts.sh $(POSTS)
+	scripts/gen_all_posts.sh
 
 $(RESUME_HTML): $(RESUME_SRC) $(TEMPLATE) Makefile | dist/resume
 	pandoc -s $(RESUME_CSS) -i $< -o $@ --template=$(TEMPLATE)
