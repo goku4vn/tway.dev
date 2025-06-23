@@ -1,23 +1,23 @@
 # Using Pomodoro in Technical Teams
 
 ## English
-Hey tech folks! Ever find yourself getting lost in code only to look up and realize hours have flown by? That's where the Pomodoro Technique can come in handy—it’s like a productivity hack for anyone who juggles complex tasks. Here’s why you might want to try it in your team:
+Hey devs! Struggling with focus amidst all the Slack pings and Jira tickets? Let me introduce (or reintroduce) you to the Pomodoro Technique. Think of it as a power-up for your productivity.
 
-- **Focus Boost:** The Pomodoro Technique encourages 25-minute deep work sessions followed by 5-minute breaks. It's amazing how much you can get done with laser focus.
+- **25-Minute Focus Sessions**: Set a timer for 25 minutes and dive into those lines of code like nothing else exists. No distractions. Just you and your task.
 
-- **Burnout Buster:** Regular breaks prevent burnout. A quick stretch, a coffee chat, or some memes on our team Slack keep us fresh.
+- **5-Minute Breaks**: Once the timer goes off, take a breather. Grab a coffee, stretch, or just vibe to your favorite playlist. It’s like a mini-reward!
 
-- **Team Sync:** Coordinate Pomodoros with your team to minimize interruptions. It’s a great way to align tasks with less friction, perfect for those times when Slack gets too noisy.
+- **Repeat and Recharge**: After four Pomodoros, take a longer break—say 15-30 minutes. Trust me, your brain will thank you.
 
-Give it a shot during your next sprint or coding marathon and see if it works wonders for staying productive without grinding yourself into the ground.
+This technique is awesome for teams too. Sync up Pomodoro sessions to foster some silent solidarity. Plus, it’s a great excuse to connect during the breaks. Crazy how a little tomato timer can boost both focus and team spirit!
 
 ## Tiếng Việt
-Chào anh em dev! Có bao giờ các bạn chăm chú vào code tới mức quên thời gian không? Phương pháp Pomodoro có thể giúp đấy — một cách tăng hiệu quả làm việc khá hay cho ai phải xử lý nhiều task phức tạp.
+Chào anh em devs! Nếu anh em đang bị mất tập trung vì Slack hay Jira thì thử Pomodoro Technique xem sao. Nó là công cụ tăng tốc năng suất đấy.
 
-- **Tăng Tập Trung:** Pomodoro giúp tạo ra các phiên làm việc 25 phút, xen kẽ với nghỉ ngơi 5 phút. Đôi khi, tập trung như thế lại làm được nhiều việc hơn.
+- **Tập trung 25 phút**: Đặt hẹn giờ 25 phút và code thôi, đừng để ý gì khác. Không bị phân tâm, chỉ có bạn và công việc thôi.
 
-- **Chống Cháy:** Nghỉ ngơi đều đặn giúp tránh kiệt sức. Một lần đứng dậy giãn cơ, cà phê nhanh, hay trò vui trên Slack cũng giúp tinh thần thoải mái.
+- **Nghỉ 5 phút**: Khi chuông reo, nghỉ ngơi tí. Uống café, duỗi người, hay có khi bật nhạc thư giãn. Kiểu mini-reward đấy!
 
-- **Đồng Bộ Đội Nhóm:** Thử áp dụng Pomodoro đồng bộ trong team để giảm gián đoạn. Hợp lý lắm khi tin nhắn Slack cứ kêu liên tục.
+- **Lặp lại và thư giãn**: Sau bốn Pomodoro, nghỉ dài hơn—15-30 phút. Não bạn sẽ biết ơn lắm!
 
-Thử xem trong sprint hay coding marathon tiếp theo xem nhé, biết đâu lại giúp ích cho sự tập trung mà không làm bạn kiệt sức.
+Cách này cũng tuyệt cho team nữa. Đồng bộ Pomodoro để anh em cùng có thời gian tập trung. Và trong những lúc nghỉ, có thêm lý do để mở lòng trò chuyện, làm tăng tình đồng đội. Ai ngờ cái đồng hồ cà chua lại nâng cao năng suất lẫn tinh thần team nhỉ!
