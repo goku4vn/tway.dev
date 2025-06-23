@@ -73,4 +73,4 @@ jobs:
       - name: Trigger GitHub Pages deployment
         env:
           GH_TOKEN: ${{ secrets.WORKFLOW_DEPLOY_TOKEN }}
-        run: gh workflow run main.yml --ref ${{ github.ref_name }} 
+        run: gh workflow run static.yml --ref ${{ github.ref_name }} 
