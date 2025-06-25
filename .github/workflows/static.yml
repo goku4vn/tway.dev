@@ -57,7 +57,26 @@ jobs:
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
           set -e
-          esc() { echo "$1" | sed -e 's/\([_\*\[\]()~`>#+\-=|{}.!]\)/\\\\\1/g'; }
+          esc() {
+            echo "$1" | sed -e 's/_/\\\\_/g' \
+                  -e 's/\*/\\\\*/g' \
+                  -e 's/\[/\\\\[/g' \
+                  -e 's/\]/\\\\]/g' \
+                  -e 's/(/\\\\(/g' \
+                  -e 's/)/\\\\)/g' \
+                  -e 's/~/\\\\~/g' \
+                  -e 's/`/\\\\`/g' \
+                  -e 's/>/\\\\>/g' \
+                  -e 's/#/\\\\#/g' \
+                  -e 's/+/\\\\+/g' \
+                  -e 's/-/\\\\-/g' \
+                  -e 's/=/\\\\=/g' \
+                  -e 's/|/\\\\|/g' \
+                  -e 's/{/\\\\{/g' \
+                  -e 's/}/\\\\}/g' \
+                  -e 's/\./\\\\./g' \
+                  -e 's/!/\\\\!/g'
+          }
           REPO=$(esc "${{ github.repository }}")
           WORKFLOW=$(esc "${{ github.workflow }}")
           BRANCH=$(esc "${{ github.ref_name }}")
@@ -79,7 +98,26 @@ jobs:
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
           set -e
-          esc() { echo "$1" | sed -e 's/\([_\*\[\]()~`>#+\-=|{}.!]\)/\\\\\1/g'; }
+          esc() {
+            echo "$1" | sed -e 's/_/\\\\_/g' \
+                  -e 's/\*/\\\\*/g' \
+                  -e 's/\[/\\\\[/g' \
+                  -e 's/\]/\\\\]/g' \
+                  -e 's/(/\\\\(/g' \
+                  -e 's/)/\\\\)/g' \
+                  -e 's/~/\\\\~/g' \
+                  -e 's/`/\\\\`/g' \
+                  -e 's/>/\\\\>/g' \
+                  -e 's/#/\\\\#/g' \
+                  -e 's/+/\\\\+/g' \
+                  -e 's/-/\\\\-/g' \
+                  -e 's/=/\\\\=/g' \
+                  -e 's/|/\\\\|/g' \
+                  -e 's/{/\\\\{/g' \
+                  -e 's/}/\\\\}/g' \
+                  -e 's/\./\\\\./g' \
+                  -e 's/!/\\\\!/g'
+          }
           REPO=$(esc "${{ github.repository }}")
           WORKFLOW=$(esc "${{ github.workflow }}")
           BRANCH=$(esc "${{ github.ref_name }}")
