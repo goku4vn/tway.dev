@@ -56,7 +56,7 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
-          esc() { echo "$1" | sed -e 's/\([_\*\[\]()~`>#+\-=|{}.!]\)/\\\1/g'; }
+          esc() { echo "$1" | sed -e 's/\([_\*\[\]()~`>#+\-=|{}]\)/\\\1/g'; }
           REPO=$(esc "${{ github.repository }}")
           WORKFLOW=$(esc "${{ github.workflow }}")
           BRANCH=$(esc "${{ github.ref_name }}")
@@ -73,7 +73,7 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
-          esc() { echo "$1" | sed -e 's/\([_\*\[\]()~`>#+\-=|{}.!]\)/\\\1/g'; }
+          esc() { echo "$1" | sed -e 's/\([_\*\[\]()~`>#+\-=|{}]\)/\\\1/g'; }
           REPO=$(esc "${{ github.repository }}")
           WORKFLOW=$(esc "${{ github.workflow }}")
           BRANCH=$(esc "${{ github.ref_name }}")
