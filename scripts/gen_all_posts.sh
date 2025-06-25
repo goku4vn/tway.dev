@@ -25,6 +25,9 @@ for file in $(find "$POSTS_DIR" -type f -name "*.md" | grep -v 'posts/index.md$'
   
   title=$(grep -m1 '^title:' "$file" | sed 's/^title:[ ]*//' || true)
   
+  # Loại bỏ dấu quote ở đầu/cuối nếu có
+  title=$(echo "$title" | sed 's/^"//;s/"$//')
+  
   # Fallback to filename if title is not found
   if [ -z "$title" ]; then
     title=$(basename "$file" .md)

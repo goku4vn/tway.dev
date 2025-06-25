@@ -24,18 +24,19 @@ for file in $(find "$POSTS_DIR" -type f -name "*.md" | grep -v 'posts/index.md$'
 
   # Get title and subtitle from YAML frontmatter
   title=$(grep -m1 '^title:' "$file" | sed 's/^title:[ ]*//' || true)
-  subtitle=$(grep -m1 '^subtitle:' "$file" | sed 's/^subtitle:[ ]*//' || true)
+  # subtitle=$(grep -m1 '^subtitle:' "$file" | sed 's/^subtitle:[ ]*//' || true)
+
+  # Loại bỏ dấu quote ở đầu/cuối nếu có
+  title=$(echo "$title" | sed 's/^"//;s/"$//')
+  # subtitle=$(echo "$subtitle" | sed 's/^"//;s/"$//')
 
   # Fallback to filename if title is not found
   if [ -z "$title" ]; then
     title=$(basename "$file" .md)
   fi
 
-  if [ -n "$subtitle" ]; then
-    LATEST_POSTS+="- $prefix[$title]($link) - $subtitle\\n"
-  else
-    LATEST_POSTS+="- $prefix[$title]($link)\\n"
-  fi
+  LATEST_POSTS+="- $prefix[$title]($link)\\n"
+
 done
 
 if [ -n "$LATEST_POSTS" ]; then
