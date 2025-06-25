@@ -49,16 +49,18 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
       - name: Notify Telegram on Success
         if: ${{ success() }}
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
-          MESSAGE="✅ Job ${{ github.workflow }} đã hoàn thành thành công trên branch ${{ github.ref_name }}!"
+          MESSAGE="✅ [${{ github.repository }}] Job *${{ github.workflow }}* đã *THÀNH CÔNG* trên branch *${{ github.ref_name }}* lúc $(date '+%H:%M %d-%m-%Y').\nXem chi tiết: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
           curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
             -d chat_id="${TELEGRAM_CHAT_ID}" \
-            -d text="$MESSAGE"
+            -d text="$MESSAGE" \
+            -d parse_mode="Markdown"
 
       - name: Notify Telegram on Failure
         if: ${{ failure() }}
@@ -66,7 +68,8 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
-          MESSAGE="❌ Job ${{ github.workflow }} bị lỗi trên branch ${{ github.ref_name }}!"
+          MESSAGE="❌ [${{ github.repository }}] Job *${{ github.workflow }}* đã *THẤT BẠI* trên branch *${{ github.ref_name }}* lúc $(date '+%H:%M %d-%m-%Y').\nXem chi tiết: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
           curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
             -d chat_id="${TELEGRAM_CHAT_ID}" \
-            -d text="$MESSAGE"
+            -d text="$MESSAGE" \
+            -d parse_mode="Markdown"
