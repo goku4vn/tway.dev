@@ -75,26 +75,47 @@ jobs:
           GH_TOKEN: ${{ secrets.PAT_DEPLOY_TOKEN }}
         run: gh workflow run static.yml --ref ${{ github.ref_name }} 
 
-      - name: Notify Telegram on Success
-        if: ${{ success() }}
+      - name: Notify Telegram
+        if: always()
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          STATUS: ${{ job.status }}
         run: |
-          MESSAGE="✅ [${{ github.repository }}] Job *${{ github.workflow }}* đã *THÀNH CÔNG* trên branch *${{ github.ref_name }}* lúc $(date '+%H:%M %d-%m-%Y').\nXem chi tiết: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-          curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
-            -d chat_id="${TELEGRAM_CHAT_ID}" \
-            -d text="$MESSAGE" \
-            -d parse_mode="Markdown"
+          set -e
+          esc() {
+            echo "$1" | sed 's/\./\\./g; s/\//\\&/g; s/-/\\&/g'
+          }
 
-      - name: Notify Telegram on Failure
-        if: ${{ failure() }}
-        env:
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        run: |
-          MESSAGE="❌ [${{ github.repository }}] Job *${{ github.workflow }}* đã *THẤT BẠI* trên branch *${{ github.ref_name }}* lúc $(date '+%H:%M %d-%m-%Y').\nXem chi tiết: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-          curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
+          # Prepare variables
+          WORKFLOW_TEXT=$(esc "${{ github.workflow }}")
+          REPO_NAME="${{ github.repository }}"
+          REPO_TEXT=$(esc "$REPO_NAME")
+          REPO_URL="https://github.com/$REPO_NAME"
+          STATUS_EMOJI="✅"
+          if [ "$STATUS" != "success" ]; then
+            STATUS_EMOJI="❌"
+          fi
+          STATUS_TEXT=$(esc "$STATUS")
+          VIEW_MORE=$(esc "View more details")
+          ACTION_URL="https://github.com/${REPO_NAME}/actions/runs/${{ github.run_id }}"
+
+          # Construct message with escaped text parts
+          MESSAGE="${STATUS_EMOJI} Github Actions"$'\n'
+          MESSAGE="${MESSAGE}\\- Job: ${WORKFLOW_TEXT}"$'\n'
+          MESSAGE="${MESSAGE}\\- Status: ${STATUS_TEXT}"$'\n'
+          MESSAGE="${MESSAGE}\\- Repository: ${REPO_TEXT}"$'\n'
+          # MESSAGE="${MESSAGE}\\- Repository: [${REPO_TEXT}](${REPO_URL})"$'\n'
+          # MESSAGE="${MESSAGE}\\- [${VIEW_MORE}](${ACTION_URL})"
+          
+          # Send message
+          RESPONSE=$(curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
             -d chat_id="${TELEGRAM_CHAT_ID}" \
             -d text="$MESSAGE" \
-            -d parse_mode="Markdown"
+            -d parse_mode="MarkdownV2")
+             
+          if ! echo "$RESPONSE" | grep -q '"ok":true'; then
+            echo "Failed to send Telegram notification"
+            echo "$RESPONSE"
+            exit 1
+          fi

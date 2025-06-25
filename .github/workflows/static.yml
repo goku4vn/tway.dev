@@ -79,8 +79,9 @@ jobs:
           MESSAGE="${STATUS_EMOJI} Github Actions"$'\n'
           MESSAGE="${MESSAGE}\\- Job: ${WORKFLOW_TEXT}"$'\n'
           MESSAGE="${MESSAGE}\\- Status: ${STATUS_TEXT}"$'\n'
-          MESSAGE="${MESSAGE}\\- Repository: [${REPO_TEXT}](<nopreview>${REPO_URL}</nopreview>)"$'\n'
-          MESSAGE="${MESSAGE}\\- [${VIEW_MORE}](<nopreview>${ACTION_URL}</nopreview>)"
+          MESSAGE="${MESSAGE}\\- Repository: ${REPO_TEXT}"$'\n'
+          # MESSAGE="${MESSAGE}\\- Repository: [${REPO_TEXT}](${REPO_URL})"$'\n'
+          # MESSAGE="${MESSAGE}\\- [${VIEW_MORE}](${ACTION_URL})"
           
           # Send message
           RESPONSE=$(curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
