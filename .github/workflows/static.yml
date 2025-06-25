@@ -62,7 +62,7 @@ jobs:
           WORKFLOW=$(esc "${{ github.workflow }}")
           BRANCH=$(esc "${{ github.ref_name }}")
           TIME=$(TZ='Asia/Ho_Chi_Minh' date '+%H:%M %d-%m-%Y (+07)')
-          MESSAGE="✅ [${REPO}] Job *\"${WORKFLOW}\"* has *SUCCEEDED* on branch *${BRANCH}* at ${TIME}.\\n[View details](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})"
+          MESSAGE="✅ [${REPO}] Job *\"${WORKFLOW}\"* has *SUCCEEDED* on branch *${BRANCH}* at ${TIME}\\.\\n[View details](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})"
           RESPONSE=$(curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
             -d chat_id="${TELEGRAM_CHAT_ID}" \
             -d text="$MESSAGE" \
@@ -84,7 +84,7 @@ jobs:
           WORKFLOW=$(esc "${{ github.workflow }}")
           BRANCH=$(esc "${{ github.ref_name }}")
           TIME=$(TZ='Asia/Ho_Chi_Minh' date '+%H:%M %d-%m-%Y (+07)')
-          MESSAGE="❌ [${REPO}] Job *\"${WORKFLOW}\"* has *FAILED* on branch *${BRANCH}* at ${TIME}.\\n[View details](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})"
+          MESSAGE="❌ [${REPO}] Job *\"${WORKFLOW}\"* has *FAILED* on branch *${BRANCH}* at ${TIME}\\.\\n[View details](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})"
           RESPONSE=$(curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
             -d chat_id="${TELEGRAM_CHAT_ID}" \
             -d text="$MESSAGE" \
