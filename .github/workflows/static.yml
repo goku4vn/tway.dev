@@ -50,11 +50,12 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
 
-      - name: Notify Telegram on Success
-        if: ${{ success() }}
+      - name: Notify Telegram
+        if: always()
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          STATUS: ${{ job.status }}
         run: |
           set -e
           esc() {
@@ -77,59 +78,30 @@ jobs:
                   -e 's/\./\\./g' \
                   -e 's/!/\\!/g'
           }
-          REPO=$(esc "${{ github.repository }}")
-          WORKFLOW=$(esc "${{ github.workflow }}")
-          BRANCH=$(esc "${{ github.ref_name }}")
-          TIME_RAW=$(TZ='Asia/Ho_Chi_Minh' date '+%H:%M %d-%m-%Y (+07)')
-          TIME=$(esc "$TIME_RAW")
-          MESSAGE="✅ [${REPO}] Job *\"${WORKFLOW}\"* has *SUCCEEDED* on branch *${BRANCH}* at ${TIME}\.[View details](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})"
-          RESPONSE=$(curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
-            -d chat_id="${TELEGRAM_CHAT_ID}" \
-            -d text="$MESSAGE" \
-            -d parse_mode="MarkdownV2")
-          if ! echo "$RESPONSE" | grep -q '"ok":true'; then
-            echo "$RESPONSE"
-            exit 1
-          fi
 
-      - name: Notify Telegram on Failure
-        if: ${{ failure() }}
-        env:
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        run: |
-          set -e
-          esc() {
-            echo "$1" | sed -e 's/_/\\_/g' \
-                  -e 's/\*/\\*/g' \
-                  -e 's/\[/\\[/g' \
-                  -e 's/\]/\\]/g' \
-                  -e 's/(/\\(/g' \
-                  -e 's/)/\\)/g' \
-                  -e 's/~/\\~/g' \
-                  -e 's/`/\\`/g' \
-                  -e 's/>/\\>/g' \
-                  -e 's/#/\\#/g' \
-                  -e 's/+/\\+/g' \
-                  -e 's/-/\\-/g' \
-                  -e 's/=/\\=/g' \
-                  -e 's/|/\\|/g' \
-                  -e 's/{/\\{/g' \
-                  -e 's/}/\\}/g' \
-                  -e 's/\./\\./g' \
-                  -e 's/!/\\!/g'
-          }
-          REPO=$(esc "${{ github.repository }}")
+          # Prepare variables
           WORKFLOW=$(esc "${{ github.workflow }}")
-          BRANCH=$(esc "${{ github.ref_name }}")
-          TIME_RAW=$(TZ='Asia/Ho_Chi_Minh' date '+%H:%M %d-%m-%Y (+07)')
-          TIME=$(esc "$TIME_RAW")
-          MESSAGE="❌ [${REPO}] Job *\"${WORKFLOW}\"* has *FAILED* on branch *${BRANCH}* at ${TIME}\.[View details](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})"
+          REPO_NAME="${{ github.repository }}"
+          REPO_TEXT=$(esc "$REPO_NAME")
+          REPO_URL=$(esc "https://github.com/$REPO_NAME")
+          STATUS_EMOJI="✅"
+          if [ "$STATUS" != "success" ]; then
+            STATUS_EMOJI="❌"
+          fi
+          VIEW_MORE=$(esc "View more details")
+
+          # Construct message
+          MESSAGE="${STATUS_EMOJI} Github Actions\n- Job: ${WORKFLOW}\n- Status: ${STATUS}\n- Repository: [${REPO_TEXT}](${REPO_URL})\n- [${VIEW_MORE}](https://github.com/${REPO_NAME}/actions/runs/${{ github.run_id }})"
+          
+          # Send message
+          ESCAPED_MESSAGE=$(esc "$MESSAGE")
           RESPONSE=$(curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
             -d chat_id="${TELEGRAM_CHAT_ID}" \
-            -d text="$MESSAGE" \
+            -d text="$ESCAPED_MESSAGE" \
             -d parse_mode="MarkdownV2")
+            
           if ! echo "$RESPONSE" | grep -q '"ok":true'; then
+            echo "Failed to send Telegram notification"
             echo "$RESPONSE"
             exit 1
           fi
