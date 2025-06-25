@@ -72,3 +72,69 @@ https://api.telegram.org/bot<TOKEN>/getUpdates
 ---
 
 Nếu cần hướng dẫn chi tiết hơn, daddy cứ hỏi baby nhé! ❤️ 
+
+# Tóm tắt các thay đổi
+
+## 2024-03-26
+- Thêm hàm `esc` vào file `test.sh` để escape các ký tự đặc biệt trong Markdown
+- Sử dụng hàm `esc` để escape message trước khi in ra
+- Các ký tự được escape bao gồm: `_ * [ ] ( ) ~ ` > # + - = | { } . ! /`
+
+- Cập nhật file `.github/workflows/static.yml`:
+  - Gộp 2 step thông báo Success và Failure thành 1
+  - Thêm biến môi trường `STATUS`
+  - Cải thiện format message thông báo:
+    + Emoji status (✅/❌)
+    + Thông tin job và workflow
+    + Link tới repository
+    + Link xem chi tiết build
+  - Sử dụng hàm `esc` để escape message
+
+- Tối ưu hàm `esc`:
+  - Sử dụng character class `[...]` để gộp các ký tự cần escape
+  - Giảm từ 18 lần thay thế xuống còn 1 lần
+  - Code ngắn gọn và dễ bảo trì hơn
+  - Thêm escape ký tự `/` để xử lý đúng tên repository
+  - Chỉ escape text, không escape URL
+
+- Cải thiện format message:
+  - Sử dụng multi-line string trong `test.sh`
+  - Tạo message từng dòng và nối bằng `$'\n'` trong `.github/workflows/static.yml` để tương thích với YAML 
+
+## Telegram Tips & Tricks
+
+### Ngăn chặn URL Preview trong Telegram
+
+Có một số cách để ngăn Telegram hiển thị preview URL:
+
+1. Sử dụng thẻ `<nopreview>`:
+```
+<nopreview>https://your-url.com</nopreview>
+```
+
+2. Thêm kí tự Zero Width Space (‌) vào giữa URL:
+```
+https://your-url.com‌
+```
+
+3. Sử dụng Markdown để format URL:
+```
+`https://your-url.com`
+```
+
+4. Sử dụng HTML entity cho dấu chấm:
+```
+https://your-url&#46;com
+``` 
+
+### Ví dụ sử dụng trong GitHub Actions
+
+Để ngăn preview URL trong tin nhắn Telegram từ GitHub Actions workflow:
+
+```yaml
+# Construct message
+MESSAGE="\\- Repository: [${REPO_TEXT}](<nopreview>${REPO_URL}</nopreview>)"$'\n'
+MESSAGE="${MESSAGE}\\- [${VIEW_MORE}](<nopreview>${ACTION_URL}</nopreview>)"
+```
+
+Lưu ý: Cần escape các ký tự đặc biệt trong message bằng `\\` khi sử dụng với MarkdownV2. 
