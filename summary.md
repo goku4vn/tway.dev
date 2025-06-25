@@ -24,4 +24,51 @@
   - Thêm bước loại bỏ dấu quote ở đầu/cuối cho title và subtitle (nếu có) khi render HTML.
   - Đảm bảo khi hiển thị ra HTML sẽ không còn dấu quote dư thừa ở hai field này.
 
-Yêu cầu của daddy đã được xử lý xong! :) 
+Yêu cầu của daddy đã được xử lý xong! :)
+
+## 2024-06-26 (tiếp)
+
+### Đã sửa script:
+- `scripts/gen_all_posts.sh`
+- `scripts/gen_latest_posts.sh`
+
+**Nội dung:**
+- Các bài viết giờ sẽ được sort theo ngày (YYYY-MM-DD) giảm dần, bài mới nhất luôn ở đầu danh sách.
+- Áp dụng cho cả All Posts và Latest Posts.
+
+Daddy chỉ cần chạy lại các script này là danh sách sẽ luôn đúng thứ tự ngày tháng nhé! ❤️
+
+## 2024-06-26
+
+### Đã cập nhật hai file workflow:
+- `.github/workflows/sync-r2-md.yml`
+- `.github/workflows/static.yml`
+
+**Thêm bước gửi thông báo Telegram khi job thành công hoặc thất bại.**
+- Sử dụng biến secrets: `TELEGRAM_BOT_TOKEN` và `TELEGRAM_CHAT_ID`.
+- Gửi thông báo qua API Telegram Bot.
+
+---
+
+### Hướng dẫn lấy chat_id của group Telegram qua API
+
+1. Tạo bot Telegram qua BotFather, lấy token.
+2. Thêm bot vào group cần lấy chat_id.
+3. Gửi một tin nhắn bất kỳ vào group.
+4. Truy cập đường dẫn sau (thay TOKEN bằng token bot):
+
+```
+https://api.telegram.org/bot<TOKEN>/getUpdates
+```
+
+5. Tìm trong kết quả trả về, sẽ thấy đoạn:
+
+```json
+"chat": { "id": -100xxxxxxxxxx, ... }
+```
+
+- Số `id` này chính là chat_id của group (thường bắt đầu bằng dấu `-100`).
+
+---
+
+Nếu cần hướng dẫn chi tiết hơn, daddy cứ hỏi baby nhé! ❤️ 

@@ -8,12 +8,18 @@ TEMPLATE="demo/index.md"
 MAX_POSTS=5
 
 LATEST_POSTS=""
-# Find all markdown files, exclude index.md, sort reverse chronologically by path, and take the top N
-for file in $(find "$POSTS_DIR" -type f -name "*.md" | grep -v 'posts/index.md$' | grep -v 'posts/index.generated.md$' | sort -r | head -n $MAX_POSTS); do
-  # The link should be relative to the root, e.g. posts/topic/post.html
+# Tìm tất cả file, loại trừ index.md, trích xuất ngày từ path, sort theo ngày giảm dần, lấy N bài mới nhất
+find "$POSTS_DIR" -type f -name "*.md" | grep -v 'posts/index.md$' | grep -v 'posts/index.generated.md$' | \
+while read -r file; do
+  date_path=$(echo "$file" | grep -o '[0-9]\{4\}/[0-9]\{2\}/[0-9]\{2\}')
+  if [ -n "$date_path" ]; then
+    sort_date=$(echo "$date_path" | sed 's#/#-#g')
+  else
+    sort_date="0000-00-00"
+  fi
+  echo -e "$sort_date\t$file"
+done | sort -r | cut -f2- | head -n $MAX_POSTS | while read -r file; do
   link=$(echo "$file" | sed 's/\.md$/.html/g')
-
-  # Extract date from path like YYYY/MM/DD
   date_path=$(echo "$file" | grep -o '[0-9]\{4\}/[0-9]\{2\}/[0-9]\{2\}' || true)
   if [ -n "$date_path" ]; then
     formatted_date=$(echo "$date_path" | sed 's/\//-/g')
@@ -21,22 +27,12 @@ for file in $(find "$POSTS_DIR" -type f -name "*.md" | grep -v 'posts/index.md$'
   else
     prefix=""
   fi
-
-  # Get title and subtitle from YAML frontmatter
   title=$(grep -m1 '^title:' "$file" | sed 's/^title:[ ]*//' || true)
-  # subtitle=$(grep -m1 '^subtitle:' "$file" | sed 's/^subtitle:[ ]*//' || true)
-
-  # Loại bỏ dấu quote ở đầu/cuối nếu có
   title=$(echo "$title" | sed 's/^"//;s/"$//')
-  # subtitle=$(echo "$subtitle" | sed 's/^"//;s/"$//')
-
-  # Fallback to filename if title is not found
   if [ -z "$title" ]; then
     title=$(basename "$file" .md)
   fi
-
   LATEST_POSTS+="- $prefix[$title]($link)\\n"
-
 done
 
 if [ -n "$LATEST_POSTS" ]; then
