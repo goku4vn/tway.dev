@@ -36,7 +36,8 @@ done | sort -r -k1,1 -k2,2 | head -n $MAX_POSTS | cut -f2- | while read -r file;
   echo "- $prefix[$title]($link)" >> "$TMP_LATEST"
 done
 
-echo "\n[View all posts...](/posts/)" >> "$TMP_LATEST"
+echo "" >> "$TMP_LATEST"
+echo "[View all posts...](/posts/)" >> "$TMP_LATEST"
 
 awk -v posts_file="$TMP_LATEST" '
   /<!--LATEST_POSTS-->/ {
