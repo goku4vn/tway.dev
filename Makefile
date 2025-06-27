@@ -4,6 +4,7 @@ BASEURL :=
 
 SRC_MD := demo/index.generated.md
 TEMPLATE := demo/template.html
+TEMPLATE_POST := demo/template-post.html
 CSS := --css src/reset.css --css src/index.css
 
 POSTS := $(shell find posts -name '*.md' -type f)
@@ -35,14 +36,18 @@ dist/src: src/*
 	mkdir -p dist/src
 	cp -r src/* dist/src/
 
+dist/assets:
+	mkdir -p dist/assets
+	cp -r assets/* dist/assets/
+
 # Build main index.html
 dist/index.html: $(SRC_MD) $(TEMPLATE) Makefile | dist
 	pandoc --toc -s $(CSS) -i $< -o $@ --template=$(TEMPLATE)
 
 # Build posts/*.html into dist/posts/
-dist/posts/%.html: posts/%.md $(TEMPLATE) Makefile
+dist/posts/%.html: posts/%.md $(TEMPLATE_POST) Makefile
 	mkdir -p $(@D)
-	pandoc -s $(POST_CSS) -Vdate=$(DATE) -i $< -o $@ --template=$(TEMPLATE)
+	pandoc -s $(POST_CSS) -Vdate=$(DATE) -i $< -o $@ --template=$(TEMPLATE_POST)
 
 $(ALL_POSTS_HTML): $(ALL_POSTS_SRC) $(TEMPLATE) Makefile | dist/posts
 	pandoc -s $(POST_CSS) -Vdate=$(DATE) -i $< -o $@ --template=$(TEMPLATE)
