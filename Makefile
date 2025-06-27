@@ -23,7 +23,7 @@ all: build
 
 .PHONY: all clean build
 
-build: demo/index.generated.md dist/index.html $(POST_HTML) $(RESUME_HTML) $(ALL_POSTS_HTML) dist/src
+build: demo/index.generated.md dist/index.html $(POST_HTML) $(RESUME_HTML) $(ALL_POSTS_HTML) dist/src dist/assets
 
 # Ensure dist/ and dist/posts/ exist
 dist:
@@ -36,7 +36,7 @@ dist/src: src/*
 	mkdir -p dist/src
 	cp -r src/* dist/src/
 
-dist/assets:
+dist/assets: assets/*
 	mkdir -p dist/assets
 	cp -r assets/* dist/assets/
 
