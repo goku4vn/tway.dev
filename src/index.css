@@ -181,6 +181,7 @@ th {
 p {
   word-break: break-word;
   word-wrap: break-word;
+  -webkit-hyphens: auto;
   hyphens: auto;
 }
 
@@ -458,6 +459,58 @@ label input {
   background: rgba(255, 0, 0, 0.1);
 }
 
-.debug-toggle-label {
+.debug-toggle-label,
+.lang-toggle-label {
+  cursor: pointer;
   text-align: right;
+}
+
+.debug-toggle-label,
+.lang-toggle-label {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+
+
+/* Controls grid layout - chỉ cho post page */
+.post-page .controls {
+  display: flex;
+      gap: 1ch;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0;
+      margin: 0;
+}
+
+.post-page .lang-toggle-label {
+  white-space: pre;
+}
+
+/* Language content visibility - chỉ cho post page */
+.post-page .lang-content {
+  transition: opacity 0.3s ease;
+}
+
+.post-page .lang-content.hidden {
+  display: none;
+}
+
+/* Language switching logic - chỉ cho post page */
+.post-page[data-language="en"] .lang-content[data-lang="vi"] {
+  display: none;
+}
+
+.post-page[data-language="vi"] .lang-content[data-lang="en"] {
+  display: none;
+}
+
+/* Default state - show English, hide Vietnamese - chỉ cho post page */
+.post-page:not([data-language]) .lang-content[data-lang="vi"] {
+  display: none;
+}
+
+/* HR separator hiding - chỉ cho post page */
+.post-page hr {
+  display: none !important;
 }

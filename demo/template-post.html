@@ -28,14 +28,31 @@ $if(math)$
   $math$
 $endif$
 </head>
-<body>
+<body class="post-page">
 $for(include-before)$
 $include-before$
 $endfor$
+<table class="header">
+  <tr>
+    <td class="width-auto" colspan="2" rowspan="2">
+      <h1 class="title">tway.dev</h1>
+      <span class="subtitle">The new way to explore the world</span>
+    </td>
+    <th class="width-min">Author</th>
+    <td class="width-auto"><a href="$author-url$"><cite>$author$</cite></a></td>
+  </tr>
+  <tr>
+    <td class="width-auto" colspan="2">
+      <label class="lang-toggle-label"><input type="checkbox" class="lang-toggle" id="lang-toggle" /> Vietnamese</label>
+    </td>
+  </tr>
+</table>
+
 <div class="grid">
-  <div><span style="font-size: 1.5rem;padding-right: .2rem;">✪</span><a href="/">tway.dev</a></div>
+  <div><span style="font-size: 1.5rem;padding-right: .2rem; text-decoration: none;">✪</span><a href="/">HOMEPAGE</a></div>
   <label class="debug-toggle-label"><input type="checkbox" class="debug-toggle" /> Debug mode</label>
 </div>
+
 $if(abstract)$
 <div class="abstract">
 <div class="abstract-title">$abstract-title$</div>
